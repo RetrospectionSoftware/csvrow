@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 author = ["Alex Clark <alexandercrclark@gmail.com>"]
 description = "Fast and simple crate for taking a string slice and iterating over the fields in a manner that adheres to RFC-4180"
-keywords = ["csv", "comma", "delimited", "separated", "rfc 4180"]
+keywords = ["csv", "comma", "delimited", "separated", "rfc4180"]
 license = "Unlicense/MIT"
 categories = ["parser-implementations"]
 
