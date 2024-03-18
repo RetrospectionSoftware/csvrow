@@ -7,7 +7,9 @@ description = "Fast and simple crate for taking a string slice and iterating ove
 keywords = ["csv", "comma", "delimited", "separated", "rfc4180"]
 license = "Unlicense/MIT"
 categories = ["parser-implementations"]
-
-
+readme = "README.md"
+homepage = "https://github.com/RetrospectionSoftware/csvrow/"
+repository = "https://github.com/RetrospectionSoftware/csvrow/"
+documentation = "https://docs.rs/csvrow"
 
 [dependencies]
