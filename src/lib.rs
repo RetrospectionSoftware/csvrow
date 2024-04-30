@@ -100,6 +100,36 @@ impl<'a> Iterator for CsvRow<'a> {
     }
 }
 
+/// Returns `Cow::Owned<str> if `expression` requires escaping to be RFC-4180 compliant.
+/// 
+/// Returns `Cow::Borrowed<str>` referencing `expression` if it does not.
+///
+/// # Arguments
+///
+/// * `expression` - A string slice that holds the value to escape
+/// * `delimiter` - A char that represents the delimiter used in the CSV document
+///
+/// # Examples
+///
+/// ```
+/// use csvrow::escape;
+/// let expression = "chupacabra";
+/// let result = escape(&expression, ',');
+/// 
+/// assert_eq!(expression, result);
+/// 
+/// let expression = "this is a \"test\", of course...";
+/// let result = escape(&expression, ',');
+/// 
+/// assert_eq!("\"this is a \"\"test\"\", of course...\"", result)
+/// ```
+pub fn escape(expression: &str, delimiter: char) -> Cow<str> {
+    
+    match expression.contains(delimiter) || expression.contains("\"") {
+        true => Cow::Owned (format!("\"{}\"", expression.replace("\"", "\"\""))),
+        false => Cow::Borrowed(expression),
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -275,5 +305,21 @@ mod tests {
         let vec_r: Vec<_> = csv.collect();
 
         assert_eq!(vec_t[..], vec_r[..])
+    }
+
+    #[test]
+    fn escapes_complex_string() {
+        let expression = "this is a \"test\", of course...";
+        let result = escape(&expression, ',');
+
+        assert_eq!("\"this is a \"\"test\"\", of course...\"", result)
+    }
+
+    #[test]
+    fn does_not_escape_simple_string() {
+        let expression = "chupacabra";
+        let result = escape(&expression, ',');
+
+        assert_eq!(expression, result)
     }
 }
