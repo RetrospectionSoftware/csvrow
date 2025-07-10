@@ -1,7 +1,7 @@
 [package]
 name = "csvrow"
-version = "0.2.1"
-edition = "2021"
+version = "0.2.2"
+edition = "2024"
 author = ["Alex Clark <alexandercrclark@gmail.com>"]
 description = "Fast and simple crate for taking a string slice and iterating over the fields in a manner that adheres to RFC-4180"
 keywords = ["csv", "comma", "delimited", "separated", "rfc4180"]
